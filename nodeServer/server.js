@@ -9,35 +9,39 @@
 // To prevent data loss where data is sent on the connection before it has been passed to the worker, the server sets the pauseOnConnect option.
 // That way, connections are paused immediately and workers can .resume() them to receive data when they're ready. Processing then proceeds as normal:
 
-const express = require('express'),
-    cluster = require('cluster'),
-    net = require('net'),
-    io = require('socket.io'),
-    io_redis = require('socket.io-redis'),
-    farmhash = require('farmhash');
+const express = require('express');
+const cluster = require('cluster');
+const net = require('net');
+const sio = require('socket.io');
+const socketMain = require('./socketMain');
+const io_redis = require('socket.io-redis');
+const farmhash = require('farmhash');
+const helmet = require('helmet');
 
-const port = 3000,
-    num_processes = require('os').cpus.length;
+const port = 8181;
+const num_processes = require('os').cpus().length;
+console.log(num_processes)
 
+    // console.log("asd")
 if (cluster.isMaster) {
+    // console.log('asd')
     // This stores our workers. We ned to keep them to be able to reference
     // them based on source IP address. It's also useful for auto-restart
     // for example.
-    var workers = [];
+    let workers = [];
 
     //Helper function for spawning worker at index 'i';
-    const spawn = function(i){
+    let spawn = function(i) {
         workers[i] = cluster.fork();
 
         //Optional: Restart worker on exit;
         workers[i].on('exit',(code,signal)=>{
-            console.log('Respawning worker: ',i);
+            // console.log('Respawning worker: ',i);
             spawn(i);
         })
     }
-
     //Spawn workers.
-    for(let i=0; i<num_processes; i++){
+    for(let i=0; i < num_processes; i++){
         spawn(i);
     }
 
@@ -50,38 +54,47 @@ if (cluster.isMaster) {
     // "real" IP number conversion, this function is on par in terms of worker
     // index distribution only much faster.
 
-    var worker_index = function(ip,len){
+    const worker_index = function(ip, len) {
         return farmhash.fingerprint32(ip) % len;
     }
 
     //Create the outside facing server listening on our port:
-    var server = net.createServer({pauseOnConnect:true},connection=>{
+    const server = net.createServer({ pauseOnConnect: true}, (connection) => {
         // We received a connection and need to pas it to the appropiate
         // worker. Get the worker for this connection's source IP and pass
         // it to the connection
-        var worker = workers[worker_index(connection.remoteAddress,num_processes)];
+        let worker = workers[worker_index(connection.remoteAddress, num_processes)];
         worker.send('sticky-session:connection', connection)
-    }).listen(port);
-}else{
+    });
+    server.listen(port);
+    console.log(`Masterlistening on port ${port}`)
+
+} else {
     //Child process
     //Echivalent cu !isMaster == isWorker
     // Note we don't use a port here because the master listens on it for us.
-    var app = new express();
+    let app = express();
     // Here you might use middleware, attach routes, etc.
+    app.use(helmet());
 
     // Don't expose our internal server to the outside.
-	var server = app.listen(0,'localhost'),
-    io = io(server);
+    const server = app.listen(0, 'localhost');
+    
+    const io = sio(server);
 
     // Tell Socket.IO to use the redis adapter. By default, the redis
 	// server is assumed to be on localhost:6379. You don't have to
 	// specify them explicitly unless you want to change them.
     io.adapter(io_redis({ host: 'localhost', port: 6379 }));
-    
+   
     // Here you might use Socket.IO middleware for authorization etc.
+    //on connection send the socket over to our module with socket stuff;
+    io.on('connection', function(socket){
+        socketMain(io,socket);
+    });
 
     //Listen to messages sent from the master. Ignore everything else.
-    process.on('message',(message,connectino)=>{
+    process.on('message',function(message,connection){
         if(message !== 'sticky-session:connection'){
             return;
         }
@@ -93,6 +106,6 @@ if (cluster.isMaster) {
 
         //Open connection that was paused at net.createServer({pauseOnConnect:true}) option
         connection.resume();
-    })
+    });
 
 }

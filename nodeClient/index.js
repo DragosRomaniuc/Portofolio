@@ -1,8 +1,13 @@
 const os = require('os');
 const io = require('socket.io-client');
 
-// let host = "";
-// let socket = io(host);
+let host = "http://127.0.0.1:8181";
+let socket = io(host);
+
+socket.on('connect',()=>{
+    console.log("I connected to the socket server!")
+})
+
 
 function performanceData() {
     return new Promise(async (resolve,reject)=>{
@@ -76,5 +81,3 @@ function getCpuLoad(){
 
     })
 }
-
-performanceData().then(data=>console.log(data));

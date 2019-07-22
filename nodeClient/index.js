@@ -76,4 +76,5 @@ function getCpuLoad(){
 
     })
 }
+
 performanceData().then(data=>console.log(data));

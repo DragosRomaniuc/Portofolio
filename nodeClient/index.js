@@ -5,7 +5,36 @@ let host = "http://127.0.0.1:8181";
 let socket = io(host);
 
 socket.on('connect',()=>{
-    console.log("I connected to the socket server!")
+    // console.log("I connected to the socket server!")
+
+    const nI = os.networkInterfaces();
+    let macA;
+
+    for(let key in nI){
+        if(!nI[key][0].internal){
+            macA=nI[key][0].mac;
+            break;
+        }
+    }
+   
+    // client auth with single key value
+    socket.emit('clientAuth','asd1234asd1234asd')
+
+    performanceData().then(data=>{
+        data.macA = macA
+        socket.emit('initPerfData',data)
+    })
+
+    let perfDataInterval = setInterval(()=>{
+        performanceData().then(perfData=>{
+            socket.emit('perfData',perfData);
+        })
+    },1000)
+//at every reboot the on.connect is called again and the set interval is set again,
+// we need to make sure that the setinterval is closed.
+    socket.on('disconnect',()=>{
+        clearInterval(perfDataInterval);
+    })
 })
 
 

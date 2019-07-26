@@ -24,11 +24,13 @@ function socketMain(io, socket){
     socket.on('initPerfData',data=>{
         console.log("initPerfData",data)
         macA = data.macA;
-        checkAndAdd(data);
+        const checkData = await checkAndAdd(data);
     })
 
     socket.on('perfData',data=>{
         console.log(data);
+        //SEND TO REACT UI
+        io.to('ui').emit('data',data);
     })
 }
 

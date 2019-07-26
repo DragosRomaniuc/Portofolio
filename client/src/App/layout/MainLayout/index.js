@@ -3,7 +3,7 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Fullscreen from "react-full-screen";
 import windowSize from 'react-window-size';
-import Aux from "../../../Hoc/Aux";
+import Aux from "../../../Hoc/auxComp";
 import routes from './../../../routes';
 import Loader from '../Loader'
 class MainLayout extends Component {

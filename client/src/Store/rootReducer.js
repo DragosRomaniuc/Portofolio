@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
-import { listReducer } from './reducers';
+import { mainLayoutReducer } from './reducers';
+import config from './../config';
+const defaultReducer = (state=config, action) => state;
 
 const rootReducer = combineReducers({
-    list: listReducer
+    mainLayout: mainLayoutReducer,
+    config: defaultReducer
 })
 
 export default rootReducer;

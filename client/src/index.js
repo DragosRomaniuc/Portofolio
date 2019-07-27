@@ -7,8 +7,7 @@ import App from './App/index';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './Store/rootReducer';
 import config from './config'
-
-const store = createStore(rootReducer);
+import store from './Store/store';
 
 const app = (
     <Provider store={store}>

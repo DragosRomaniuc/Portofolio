@@ -1,4 +1,4 @@
 export default {
-    defaultPath: '/dashboard/default',
+    defaultPath: '/default',
     basename: '/performancemonitor'
 }

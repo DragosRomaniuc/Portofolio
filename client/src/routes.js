@@ -9,7 +9,7 @@ const authRoutes = {
 }
 
 const mainLayoutRoutes = {
-    DashboardDefault: React.lazy(() => import('./App/layout/MainLayout/'))
+    DashboardDefault: React.lazy(() => import('./App/layout/MainLayout/MainLayout'))
 }
 
 

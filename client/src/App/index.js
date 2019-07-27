@@ -6,7 +6,7 @@ import ScrollToTop from './layout/ScrollToTop/ScrollToTop';
 import routes from "../routes";
 
 const MainLayout = Loadable({
-    loader: () => import('./layout/MainLayout'),
+    loader: () => import('./layout/MainLayout/MainLayout'),
     loading: Loader
 })
 
@@ -23,24 +23,15 @@ class App extends Component {
             /> : null
         })
 
-        const mainLayout = routes.mainLayout.map((route,index) => {
-            return route.component ? <Route
-            key={index}
-            path={route.path}
-            exact={route.exact}
-            name={route.name}
-            render={props => <route.component {...props}/>}
-            /> : null
-        })
-
-        console.log(auth);
+        // console.log(auth);
 
         return (
         <ScrollToTop>
             <Suspense fallback={<Loader/>}>
                 <Switch>
+                    {/* auth routes */}
                     {auth}
-                    {mainLayout}
+                    <Route path="/" component={MainLayout} />
                 </Switch>
             </Suspense>
         </ScrollToTop>)

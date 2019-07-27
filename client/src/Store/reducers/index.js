@@ -1,1 +1,1 @@
-export * from "./listReducer";
+export * from "./mainLayoutReducer";

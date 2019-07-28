@@ -4,7 +4,6 @@ import Loadable from 'react-loadable';
 import Loader from './layout/Loader';
 import ScrollToTop from './layout/ScrollToTop/ScrollToTop';
 import routes from "../routes";
-
 const MainLayout = Loadable({
     loader: () => import('./layout/MainLayout/MainLayout'),
     loading: Loader

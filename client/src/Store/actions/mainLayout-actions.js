@@ -2,13 +2,13 @@ import axios from 'axios';
 // import actionTypes from './../actiontype';
 import { MAINLAYOUT } from './../actiontype';
 
-export const getData = () => {
+export const setData = (data) => {
     return async dispatch => {
         try{
-
+            
             dispatch({
-              type: MAINLAYOUT.GET_DATA,
-              payload: 'this is my DATA from MAINLAYOUT'  
+              type: MAINLAYOUT.SET_DATA,
+              payload: data  
             })
 
         }catch(err){

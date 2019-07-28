@@ -5,10 +5,34 @@ import Aux from "../../../Hoc/auxComp";
 import routes from '../../../routes';
 import Loader from '../Loader'
 import * as mainLayoutAction from './../../../Store/actions/mainLayout-actions';
+import Dashboard from './Dashboard.js'
+const io = require('socket.io-client');
 
 class MainLayout extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            socket: null
+        }
+    }
+    async componentDidMount(){
+       await this.initSocket();
+    }
+
+    initSocket = () => {
+        const socket = io('http://127.0.0.1:8181');
+
+        socket.on('connect', () => {
+            console.log('Connected');
+            socket.emit('clientAuth','authkeyclient');
+        });
+     
+        socket.on('data',data=>{
+            this.props.setData(data);
+        })
+
+    }
     render(){
-        console.log(this.props,"MAINLAYOUT")
         // const mainLayoutRoutes = routes.mainLayout.map((route,index) => {
         //     return (route.component) ? (
         //         <Route
@@ -22,11 +46,8 @@ class MainLayout extends Component {
 
 
         return(<Aux>
-            <div onClick={()=>this.props.getData()}>Bun venit Main Layout
-            {this.props.data}
-            </div>
             <Suspense fallback={<Loader/>}>
-            
+                <Dashboard machines={this.props.machines}/>
                 <Switch>
                     {/* {mainLayoutRoutes} */}
                     <Redirect from="/" to={this.props.config.defaultPath} />
@@ -39,14 +60,15 @@ class MainLayout extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log('state',state)
+    // console.log('state',state)
     return {
-        config: state.config
+        config: state.config,
+        machines: state.mainLayout.machines
     }
 }
 
 const mapActionToProps = {
-    getData: mainLayoutAction.getData
+    setData: mainLayoutAction.setData
 }
 
 export default connect(mapStateToProps,mapActionToProps)(MainLayout);

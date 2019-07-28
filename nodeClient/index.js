@@ -8,26 +8,36 @@ socket.on('connect',()=>{
     // console.log("I connected to the socket server!")
 
     const nI = os.networkInterfaces();
-    let macA;
+    let macA = "XX:XX:XX:XX:XX:XX".replace(/X/g, function() {
+        return "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))
+      });
 
-    for(let key in nI){
-        if(!nI[key][0].internal){
-            macA=nI[key][0].mac;
-            break;
-        }
-    }
+    //  // FOR TESTING PURPOSES!!!
+    //  macA = Math.floor(Math.random() * 3) + 1;
+    //  break;
+     // FOR TESTING PURPOSES!!!
+     
+    // for(let key in nI){
+    //     if(!nI[key][0].internal){
+    //         macA=nI[key][0].mac;
+    //         break;
+    //     }
+    // }
    
     // client auth with single key value
-    socket.emit('clientAuth','asd1234asd1234asd')
+    socket.emit('clientAuth','authkey1234authkey')
 
     performanceData().then(data=>{
         data.macA = macA
         socket.emit('initPerfData',data)
+        console.log('data',data);
     })
 
     let perfDataInterval = setInterval(()=>{
         performanceData().then(perfData=>{
+            perfData.macA = macA;
             socket.emit('perfData',perfData);
+            console.log('perfData',perfData)
         })
     },1000)
 //at every reboot the on.connect is called again and the set interval is set again,
@@ -61,12 +71,12 @@ function performanceData() {
             const cpuLoad = await getCpuLoad();
             const isActive = true;
             resolve({
-                freeMem,totalMem,usedMem,memUsage,osType,osArch,upTime,
+                freeMem,totalMem,usedMem,memUsage,osType,osArch,upTime,isActive,
                 cpu:{model:cpuModel,
                     cores:numCores,
                     speed: cpuSpeed,
                     load:cpuLoad},
-                    isActive
+                    
             })
 
     })
@@ -102,7 +112,7 @@ function getCpuLoad(){
             const end = getCpuAverage();
             const idleDifference = end.idle - start.idle;
             const totalDifference = end.total - start.total;
-            console.log(start,end)
+            // console.log(start,end)
              // calc the % of used cpu
              const percentageCpu = 100 - Math.floor(100 * idleDifference / totalDifference);
              resolve(percentageCpu);

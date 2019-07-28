@@ -6,14 +6,17 @@ const Machine = new Schema({
     cpuLoad: Number,
     freeMem: Number,
     totalMem: Number,
-    usedMe: Number,
+    usedMem: Number,
     memUsage: Number,
     osType: String,
     upTime: Number,
-    cpuModel: String,
-    numCores: Number,
-    cpuSpeed: Number,
-    cpuLoad: Number
+    cpu: {
+        model: String,
+        cores: Number,
+        speed: Number,
+        load: Number,
+    },
+    isActive: String
 })
 
 module.exports = mongoose.model('Machine',Machine)

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Machine = require('./models/Machine')
 
 mongoose.connect('mongodb://127.0.0.1/perfData', { useNewUrlParser: true });
-
+let macA;
 function socketMain(io, socket){
     console.log("Someone called me! I'm socket main");
     console.log(socket.id);
@@ -12,6 +12,16 @@ function socketMain(io, socket){
         if(key === 'authkey1234authkey'){
             //valid nodeClient
             socket.join('clients');
+            socket.on('disconnect',()=>{
+                Machine.find({macA:macA},(err,data)=>{
+                    if(data.length > 0){
+                        data[0].isActive = false;
+                        io.to('ui').emit('data',data[0]);
+                    }
+                   
+                    
+                })
+             })
         }else if(key === "authkeyclient" ){
             //valid ui has joined;
             console.log('socket.id',socket.id,'JOINEEd')
@@ -34,13 +44,7 @@ function socketMain(io, socket){
 
     })
 
-//    socket.on('getMachineList',data=>{
-//        getMachineList().then(machines=>{
-//            let newData = machines;
-//            newData.forEach(item=>item['isActive']=false);
-//            socket.emit('machineList',newData);
-//        })
-//    })
+    
 
 
     //A machine has connected, check to see if it's new, if it is, add it.

@@ -79,10 +79,6 @@ function secondsToTime(secs)
 }
 export default function Album(props) {
   const classes = useStyles();
-  const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
-    // console.log(typeof Array.from(props.machines.machines),'from function')
-    // const machines = props.machines.machines;
     console.log(props.machines,'props')
     let cards = [];
     for(let key in props.machines){

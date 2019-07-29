@@ -6,6 +6,8 @@ import routes from '../../../routes';
 import Loader from '../Loader'
 import * as mainLayoutAction from './../../../Store/actions/mainLayout-actions';
 import Dashboard from './Dashboard.js'
+import config from './../../../config';
+
 const io = require('socket.io-client');
 
 class MainLayout extends Component {
@@ -20,7 +22,7 @@ class MainLayout extends Component {
     }
 
     initSocket = () => {
-        const socket = io('http://127.0.0.1:8181');
+        const socket = io(config.hostname);
 
         socket.on('connect', () => {
             console.log('Connected');

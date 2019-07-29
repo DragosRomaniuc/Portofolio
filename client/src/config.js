@@ -1,4 +1,5 @@
 export default {
     defaultPath: '/default',
-    basename: '/performancemonitor'
+    basename: '/performancemonitor',
+    hostname: 'https://secretserver.frespire.com'
 }

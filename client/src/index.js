@@ -1,11 +1,11 @@
+import 'core-js/es/map';
+import 'core-js/es/set';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App/index';
 import * as serviceWorker from './serviceWorker';
-import rootReducer from './Store/rootReducer';
 import config from './config'
 import store from './Store/store';
 
@@ -16,11 +16,6 @@ const app = (
         </BrowserRouter>
     </Provider>
 )
-
-
-
-
-
 
 
 ReactDOM.render(app, document.getElementById('root'));

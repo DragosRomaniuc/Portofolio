@@ -59,7 +59,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function formatBytes(a,b){if(0==a)return"0 Bytes";var c=1024,d=b||2,e=["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"],f=Math.floor(Math.log(a)/Math.log(c));return parseFloat((a/Math.pow(c,f)).toFixed(d))+" "+e[f]}
+function formatBytes(a,b){if(0===a)return"0 Bytes";var c=1024,d=b||2,e=["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"],f=Math.floor(Math.log(a)/Math.log(c));return parseFloat((a/Math.pow(c,f)).toFixed(d))+" "+e[f]}
 function secondsToTime(secs)
 {
     var hours = Math.floor(secs / (60 * 60));
@@ -67,14 +67,8 @@ function secondsToTime(secs)
     var divisor_for_minutes = secs % (60 * 60);
     var minutes = Math.floor(divisor_for_minutes / 60);
 
-    var divisor_for_seconds = divisor_for_minutes % 60;
-    var seconds = Math.ceil(divisor_for_seconds);
-
-    var obj = {
-        "h": hours,
-        "m": minutes,
-        "s": seconds
-    };
+    // var divisor_for_seconds = divisor_for_minutes % 60;
+    // var seconds = Math.ceil(divisor_for_seconds);
     return `${hours}h ${minutes}m`
 }
 export default function Album(props) {
@@ -104,16 +98,17 @@ export default function Album(props) {
               Performance Monitor
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            <div>
-              <div style={{textAlign: 'center'}}>
+            {/* <div> */}
+              {/* <div style={{textAlign: 'center'}}> */}
                   <span style={{ fontWeight: 700}}>Front End: </span> 
-                  <span style={{ fontSize: 19}}>React, Socket.IO, Redux, React-Router, Material-UI</span>
-              </div>
-              <div style={{textAlign: 'center'}}>
+                  <span style={{ fontSize: 19}}>React, Socket.IO, Redux, React-Router,MaterialUI</span>
+                  <span></span>
+              {/* </div> */}
+              {/* <div style={{textAlign: 'center'}}> */}
                   <span style={{ fontWeight: 700}}>BackEnd: </span> 
                   <span style={{ fontSize: 19}}>NodeJS and its modules(Cluster,OS), Socket.IO, Redis, MongoDB </span>
-              </div>
-            </div>
+              {/* </div> */}
+            {/* </div> */}
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">

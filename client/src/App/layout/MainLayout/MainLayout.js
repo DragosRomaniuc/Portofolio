@@ -1,12 +1,12 @@
 import React, { Component, Suspense } from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom';
+import {Switch, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Aux from "../../../Hoc/auxComp";
-import routes from '../../../routes';
+// import routes from '../../../routes';
 import Loader from '../Loader'
 import * as mainLayoutAction from './../../../Store/actions/mainLayout-actions';
 import Dashboard from './Dashboard.js'
-import config from './../../../config';
+// import config from './../../../config';
 
 const io = require('socket.io-client');
 
@@ -21,8 +21,9 @@ class MainLayout extends Component {
        await this.initSocket();
     }
 
-    initSocket = () => {
-        const socket = io(config.hostname);
+    initSocket = async () => {
+        // adaugat in config sau ENV mai tarziu =>
+        const socket = io('https://secretserver.frespire.com',{transports: ['websocket']});
 
         socket.on('connect', () => {
             console.log('Connected');

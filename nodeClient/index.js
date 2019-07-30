@@ -1,8 +1,8 @@
 const os = require('os');
 const io = require('socket.io-client');
-const config = require('./config');
 
-let socket = io('https://secretserver.frespire.com');
+import config2 from './config.js';
+let socket = io(config.hostname);
 
 socket.on('connect',()=>{
     // console.log("I connected to the socket server!")

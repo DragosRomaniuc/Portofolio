@@ -4,4 +4,12 @@ How it works:
 
 Each process of NodeClient sends data to NodeServer. NodeServer sends data to the React UI.
 
+
+Deployed here: www.frespire.com/
+
+
+
+
+
+
 ![Romaniuc Dragos Performance Monitor JS](https://i.imgur.com/wQljxYE.png)

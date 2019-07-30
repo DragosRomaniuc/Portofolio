@@ -3,7 +3,7 @@ import 'core-js/es/set';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import App from './App/index';
 import * as serviceWorker from './serviceWorker';
 import config from './config'
@@ -11,9 +11,9 @@ import store from './Store/store';
 
 const app = (
     <Provider store={store}>
-        <BrowserRouter basename={config.basename}>
+        <HashRouter basename={config.basename}>
             <App/>
-        </BrowserRouter>
+        </HashRouter>
     </Provider>
 )
 

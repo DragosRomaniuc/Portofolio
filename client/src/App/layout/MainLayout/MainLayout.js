@@ -1,5 +1,7 @@
 import React, { Component, Suspense } from 'react';
-import {Switch, Redirect} from 'react-router-dom';
+import {Switch, 
+    // Redirect
+} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Aux from "../../../Hoc/auxComp";
 // import routes from '../../../routes';
@@ -53,7 +55,7 @@ class MainLayout extends Component {
                 <Dashboard machines={this.props.machines}/>
                 <Switch>
                     {/* {mainLayoutRoutes} */}
-                    <Redirect from="/" to={this.props.config.defaultPath} />
+                    {/* <Redirect from="/" to={this.props.config.defaultPath} /> */}
                  </Switch>
             </Suspense>
         </Aux>)

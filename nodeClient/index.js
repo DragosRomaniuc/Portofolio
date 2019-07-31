@@ -8,21 +8,21 @@ socket.on('connect',()=>{
     // console.log("I connected to the socket server!")
 
     const nI = os.networkInterfaces();
-    let macA = "XX:XX:XX:XX:XX:XX".replace(/X/g, function() {
-        return "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))
-      });
+    // let macA = "XX:XX:XX:XX:XX:XX".replace(/X/g, function() {
+    //     return "0123456789ABCDEF".charAt(Math.floor(Math.random() * 16))
+    //   });
 
     //  // FOR TESTING PURPOSES!!!
     //  macA = Math.floor(Math.random() * 3) + 1;
     //  break;
      // FOR TESTING PURPOSES!!!
      
-    // for(let key in nI){
-    //     if(!nI[key][0].internal){
-    //         macA=nI[key][0].mac;
-    //         break;
-    //     }
-    // }
+    for(let key in nI){
+        if(!nI[key][0].internal){
+            macA=nI[key][0].mac;
+            break;
+        }
+    }
    
     // client auth with single key value
     socket.emit('clientAuth','authkey1234authkey')
@@ -30,16 +30,16 @@ socket.on('connect',()=>{
     performanceData().then(data=>{
         data.macA = macA
         socket.emit('initPerfData',data)
-        console.log('data',data);
+        // console.log('data',data);
     })
 
     let perfDataInterval = setInterval(()=>{
         performanceData().then(perfData=>{
             perfData.macA = macA;
             socket.emit('perfData',perfData);
-            console.log('perfData',perfData)
+            // console.log('perfData',perfData)
         })
-    },1000)
+    },300)
 //at every reboot the on.connect is called again and the set interval is set again,
 // we need to make sure that the setinterval is closed.
     socket.on('disconnect',()=>{
@@ -59,7 +59,10 @@ function performanceData() {
             const usedMem = totalMem - freeMem;
             const memUsage = Math.floor(usedMem/totalMem*100)/100;
 // The os.type() method returns a string identifying the operating system name as returned by uname(3). For example, 'Linux' on Linux, 'Darwin' on macOS, and 'Windows_NT' on Windows.
-            const osType = os.type() == 'Darwin' ? "Mac" : "Windows_NT" ? "Windows" : os.type();
+            const osType = os.type();
+            if(os.type() == 'Darwin' ) osType = 'Mac';
+            if(os.type() == "Windows_NT") osType = 'Windows';
+            
 // The os.uptime() method returns the system uptime in number of seconds.
             const upTime = os.uptime()
 // The os.arch() method returns a string identifying the operating system CPU architecture for which the Node.js binary was compiled.

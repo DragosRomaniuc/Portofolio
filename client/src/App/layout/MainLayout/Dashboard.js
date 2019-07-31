@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
   icon: {
     marginRight: theme.spacing(2),
   },
+  statusActive:{
+    color: theme.palette.primary[100]
+  },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
@@ -73,12 +76,12 @@ function secondsToTime(secs)
 }
 export default function Album(props) {
   const classes = useStyles();
-    console.log(props.machines,'props')
+    // console.log(props.machines,'props')
     let cards = [];
     for(let key in props.machines){
       cards.push(props.machines[key]);
     }
-    console.log(cards);
+    // console.log(cards);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -151,9 +154,9 @@ export default function Album(props) {
                       <ListItemText secondary={card.macA} />
                     </ListItem>
                     <Divider/>
-                    <ListItem >
-                      <ListItemText primary="Status:" />
-                      <ListItemText secondary={card.isActive === true ? 'Active' : 'Inactive'} />
+                    <ListItem className={card.isActive===true ? classes.statusActive : 'nothing'}>
+                      <ListItemText className={card.isActive===true ? classes.statusActive : 'nothing'} primary="Status:" />
+                      <ListItemText className={card.isActive===true ? classes.statusActive : 'nothing'} secondary={card.isActive === true ? 'Active' : 'Inactive'} />
                     </ListItem>
 
                     <ListItem >
@@ -174,7 +177,7 @@ export default function Album(props) {
                       <ListItemText primary="Cpu Cores" />
                       <ListItemText secondary={card.cpu.cores} />
                     </ListItem>
-                    <ListItem >
+                    <ListItem className={card.isActive===true ? classes.statusActive : 'nothing'}>
                       <ListItemText primary="Cpu Load" />
                       <ListItemText secondary={`${card.cpu.load}%`} />
                     </ListItem>

@@ -87,16 +87,5 @@ function checkAndAdd(data) {
     })
 }
 
-function getMachineList(){
-    return new Promise((resolve,reject)=>{
-        Machine.find({},(err,data) => {
-            if(err) reject(data);
-            data.forEach(aMachine => {
-                aMachine.isActive = false;
-            })
-            resolve(data);
-        })
-    })
-}
 
 module.exports = socketMain;

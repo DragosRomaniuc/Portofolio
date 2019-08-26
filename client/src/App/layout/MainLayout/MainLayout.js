@@ -1,15 +1,19 @@
 import React, { Component, Suspense } from 'react';
 import {Switch, 
-    // Redirect
+    Redirect,
+    Route
 } from 'react-router-dom';
+// import Loadable from 'react-loadable';
 import {connect} from 'react-redux';
 import Aux from "../../../Hoc/auxComp";
 // import routes from '../../../routes';
 import Loader from '../Loader'
 import * as mainLayoutAction from './../../../Store/actions/mainLayout-actions';
-import Dashboard from './Dashboard.js'
+import routes from "./../../../routes";
+// const 
+import MinimalisticIntro from './MinimalisticIntro.js';
+import Card from './Card';
 // import config from './../../../config';
-
 const io = require('socket.io-client');
 
 class MainLayout extends Component {
@@ -19,44 +23,32 @@ class MainLayout extends Component {
             socket: null
         }
     }
-    async componentDidMount(){
-       await this.initSocket();
-    }
 
-    initSocket = async () => {
-        // adaugat in config sau ENV mai tarziu =>
-        const socket = io('https://secretserver.frespire.com',{transports: ['websocket']});
-
-        socket.on('connect', () => {
-            console.log('Connected');
-            socket.emit('clientAuth','authkeyclient');
-        });
-     
-        socket.on('data',data=>{
-            this.props.setData(data);
+    render(){
+        const mainLayoutRoutes = routes.mainLayout.routes.map((route,index) => {
+            return (route.component) ? (
+                <Route
+                    key={index}
+                    path={route.path}
+                    exact={route.exact}
+                    name={route.name}
+                    render={props=><route.component {...props}/>} /> 
+            ) : (null)
         })
 
-    }
-    render(){
-        // const mainLayoutRoutes = routes.mainLayout.map((route,index) => {
-        //     return (route.component) ? (
-        //         <Route
-        //             key={index}
-        //             path={route.path}
-        //             exact={route.exact}
-        //             name={route.name}
-        //             render={props=><route.component {...props}/>} /> 
-        //     ) : (null)
-        // })
-
-
+        console.log(mainLayoutRoutes,'layoutroutes')
         return(<Aux>
             <Suspense fallback={<Loader/>}>
-                <Dashboard machines={this.props.machines}/>
-                <Switch>
-                    {/* {mainLayoutRoutes} */}
-                    {/* <Redirect from="/" to={this.props.config.defaultPath} /> */}
-                 </Switch>
+                {/* <Dashboard machines={this.props.machines}/> */}
+            
+             <MinimalisticIntro/>
+          
+                
+                {/* <Switch>
+                    {mainLayoutRoutes}
+                    
+                    <Redirect from="/" to="/default" />
+                 </Switch> */}
             </Suspense>
         </Aux>)
 

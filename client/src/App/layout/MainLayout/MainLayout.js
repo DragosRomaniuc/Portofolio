@@ -14,7 +14,6 @@ import routes from "./../../../routes";
 import MinimalisticIntro from './MinimalisticIntro.js';
 import Card from './Card';
 // import config from './../../../config';
-const io = require('socket.io-client');
 
 class MainLayout extends Component {
     constructor(props){

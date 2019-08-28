@@ -5,11 +5,8 @@ import { Button, Card, Container, Row, Col, Badge, CardBody, InputGroup, Input, 
 
 // core components
 import DemoNavbar from "components/Navbars/DemoNavbar";
-import SimpleFooter from "components/Footers/SimpleFooter.jsx";
-import Pagination from "components/custom/Pagination.js";
 import ProjectsTable from "components/custom/ProjectsTable.js";
 import Contact from "components/custom/Contact.js";
-import classnames from 'classnames';
 
 class MinimalisticIntro extends React.Component {
   componentDidMount() {

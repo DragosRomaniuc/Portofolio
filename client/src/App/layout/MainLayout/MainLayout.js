@@ -12,7 +12,6 @@ import * as mainLayoutAction from './../../../Store/actions/mainLayout-actions';
 import routes from "./../../../routes";
 // const 
 import MinimalisticIntro from './MinimalisticIntro.js';
-import Card from './Card';
 // import config from './../../../config';
 
 class MainLayout extends Component {

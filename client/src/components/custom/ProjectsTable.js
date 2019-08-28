@@ -17,6 +17,7 @@ import {
   Progress,
   Table,
   Container,
+  Button,
   Row,
   UncontrolledTooltip
 } from "reactstrap";
@@ -44,7 +45,8 @@ class Tables extends React.Component {
                       <th scope="col">Status</th>
                       <th scope="col">Tehnologies</th>
                       <th scope="col">Completion</th>
-                      <th scope="col" />
+                      <th scope="col">Live DEMO</th>
+                      {/* <th scope="col" /> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -126,7 +128,12 @@ class Tables extends React.Component {
                           </div>
                         </div>
                       </td>
-                      <td className="text-right">
+                      <td>
+                        <div className="d-flex align-items-center">
+                        <Button className="mr-4" color="danger" href="http://performancemonitor.frespire.com" disabled size="sm" > Live DEMO </Button>
+                        </div>
+                      </td>
+                      {/* <td className="text-right">
                         <UncontrolledDropdown>
                           <DropdownToggle
                             className="btn-icon-only"
@@ -159,7 +166,7 @@ class Tables extends React.Component {
                             </DropdownItem>
                           </DropdownMenu>
                         </UncontrolledDropdown>
-                      </td>
+                      </td> */}
                     </tr>
                     <tr>
                       <th scope="row">
@@ -275,7 +282,12 @@ class Tables extends React.Component {
                           </div>
                         </div>
                       </td>
-                      <td className="text-right">
+                      <td>
+                        <div className="d-flex align-items-center">
+                        <Button className="mr-4" color="info" href="http://performancemonitor.frespire.com" size="sm" > Live DEMO </Button>
+                        </div>
+                      </td>
+                      {/* <td className="text-right">
                         <UncontrolledDropdown>
                           <DropdownToggle
                             className="btn-icon-only text-light"
@@ -308,7 +320,7 @@ class Tables extends React.Component {
                             </DropdownItem>
                           </DropdownMenu>
                         </UncontrolledDropdown>
-                      </td>
+                      </td> */}
                     </tr>
                     <tr>
                       <th scope="row">
@@ -422,7 +434,12 @@ class Tables extends React.Component {
                           </div>
                         </div>
                       </td>
-                      <td className="text-right">
+                      <td>
+                        <div className="d-flex align-items-center">
+                        <Button className="mr-4" color="danger" href="http://performancemonitor.frespire.com" disabled size="sm" > Live DEMO </Button>
+                        </div>
+                      </td>
+                      {/* <td className="text-right">
                         <UncontrolledDropdown>
                           <DropdownToggle
                             className="btn-icon-only text-light"
@@ -439,7 +456,7 @@ class Tables extends React.Component {
                               href="#pablo"
                               onClick={e => e.preventDefault()}
                             >
-                              Action
+                              Live demo
                             </DropdownItem>
                             <DropdownItem
                               href="#pablo"
@@ -455,7 +472,7 @@ class Tables extends React.Component {
                             </DropdownItem>
                           </DropdownMenu>
                         </UncontrolledDropdown>
-                      </td>
+                      </td> */}
                     </tr>
                     
                   </tbody>

@@ -37,20 +37,21 @@ class Tables extends React.Component {
                 <CardHeader className="border-0">
                   <h3 className="mb-0">Projects</h3>
                 </CardHeader>
-                <Table className="align-items-center table-flush" responsive hover={true}>
+                <Table className="align-items-center table-flush" bordered responsive hover={true}>
                   <thead className="thead-light">
                     <tr>
                       <th scope="col">Project</th>
-
-                      <th scope="col">Status</th>
-                      <th scope="col">Tehnologies</th>
-                      <th scope="col">Completion</th>
                       <th scope="col">Live DEMO</th>
+                      <th scope="col">Tehnologies</th>
+                      <th scope="col">Status</th>
+                      
+                      <th scope="col">Completion</th>
+                      
                       {/* <th scope="col" /> */}
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr >
                       <th scope="row">
                         <Media className="align-items-center">
                           <a
@@ -67,13 +68,12 @@ class Tables extends React.Component {
                           </Media>
                         </Media>
                       </th>
-                     
                       <td>
-                        <Badge color="" className="badge-dot mr-4">
-                          <i className="bg-warning" />
-                          Completed
-                        </Badge>
+                        <div className="d-flex align-items-center">
+                        <Button className="mr-4" color="danger" href="http://performancemonitor.frespire.com" disabled size="sm" > Live DEMO </Button>
+                        </div>
                       </td>
+                     
                       <td>
                         <div className="avatar-group">
                           <a
@@ -117,6 +117,12 @@ class Tables extends React.Component {
                         </div>
                       </td>
                       <td>
+                        <Badge color="" className="badge-dot mr-4">
+                          <i className="bg-warning" />
+                          Completed
+                        </Badge>
+                      </td>
+                      <td>
                         <div className="d-flex align-items-center">
                           <span className="mr-2">60%</span>
                           <div>
@@ -128,11 +134,7 @@ class Tables extends React.Component {
                           </div>
                         </div>
                       </td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                        <Button className="mr-4" color="danger" href="http://performancemonitor.frespire.com" disabled size="sm" > Live DEMO </Button>
-                        </div>
-                      </td>
+                      
                       {/* <td className="text-right">
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -187,13 +189,12 @@ class Tables extends React.Component {
                           </Media>
                         </Media>
                       </th>
-                     
                       <td>
-                        <Badge color="" className="badge-dot">
-                          <i className="bg-success" />
-                          completed
-                        </Badge>
+                        <div className="d-flex align-items-center">
+                        <Button className="mr-4" color="info" href="http://performancemonitor.frespire.com" size="sm" > Live DEMO </Button>
+                        </div>
                       </td>
+                     
                       <td>
                         <div className="avatar-group">
                           <a
@@ -271,6 +272,12 @@ class Tables extends React.Component {
                         </div>
                       </td>
                       <td>
+                        <Badge color="" className="badge-dot">
+                          <i className="bg-success" />
+                          completed
+                        </Badge>
+                      </td>
+                      <td>
                         <div className="d-flex align-items-center">
                           <span className="mr-2">100%</span>
                           <div>
@@ -282,11 +289,8 @@ class Tables extends React.Component {
                           </div>
                         </div>
                       </td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                        <Button className="mr-4" color="info" href="http://performancemonitor.frespire.com" size="sm" > Live DEMO </Button>
-                        </div>
-                      </td>
+                      
+                     
                       {/* <td className="text-right">
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -341,10 +345,9 @@ class Tables extends React.Component {
                       </th>
                      
                       <td>
-                        <Badge color="" className="badge-dot mr-4">
-                          <i className="bg-danger" />
-                          delayed
-                        </Badge>
+                        <div className="d-flex align-items-center">
+                        <Button className="mr-4" color="danger" href="http://performancemonitor.frespire.com" disabled size="sm" > Live DEMO </Button>
+                        </div>
                       </td>
                       <td>
                         <div className="avatar-group">
@@ -423,6 +426,12 @@ class Tables extends React.Component {
                         </div>
                       </td>
                       <td>
+                        <Badge color="" className="badge-dot mr-4">
+                          <i className="bg-danger" />
+                          delayed
+                        </Badge>
+                      </td>
+                      <td>
                         <div className="d-flex align-items-center">
                           <span className="mr-2">72%</span>
                           <div>
@@ -434,11 +443,7 @@ class Tables extends React.Component {
                           </div>
                         </div>
                       </td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                        <Button className="mr-4" color="danger" href="http://performancemonitor.frespire.com" disabled size="sm" > Live DEMO </Button>
-                        </div>
-                      </td>
+                      
                       {/* <td className="text-right">
                         <UncontrolledDropdown>
                           <DropdownToggle

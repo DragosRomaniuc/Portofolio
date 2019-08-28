@@ -275,11 +275,13 @@ class MinimalisticIntro extends React.Component {
                       </Card>
                       </Col>
               </Row> */}
-             <Row>
+            
                 {/* <Pagination/> */}
-
-                <ProjectsTable/>
-             </Row>
+               
+                    <ProjectsTable/>
+                    
+               
+             
 
 
              

@@ -1,5 +1,5 @@
 {
-  "name": "Portofoliul",
+  "name": "Portofolio",
   "version": "0.1.0",
   "private": true,
   "homepage": "http://frespire.com/",
@@ -15,7 +15,6 @@
     "express": "^4.17.1",
     "headroom.js": "^0.9.4",
     "http-proxy-middleware": "^0.19.1",
-    "mdbreact": "^4.19.1",
     "node-sass": "^4.12.0",
     "path": "^0.12.7",
     "react": "^16.8.6",
@@ -29,11 +28,10 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "sass": "^1.22.10",
-    "serve": "^11.1.0",
-    "socket.io-client": "^2.2.0"
+    "serve": "^11.1.0"
   },
   "scripts": {
-    "start": " set PORT=3007 && cross-env NODE_PATH=src/ react-scripts start",
+    "start": "cross-env NODE_PATH=src/ react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,5 +1,2 @@
-/nodeClient/node_modules
-/nodeServer/node_modules
-/reactclient/node_modules
 /client/node_modules
-client/node_modules
+client/node_modules/
